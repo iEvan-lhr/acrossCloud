@@ -100,7 +100,6 @@ func requestDo(pathname string, protocol string, method string, bodyType string,
 				"x-ca-key":       client.AppKey,
 				"accept":         "application/json",
 				"content-type":   "application/json",
-				"Authorization":  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDAyMzkwNjYsImlhdCI6MTY0MDA2NjI2NiwianRpIjoiMTY0MDA2NjI2NjEwIn0.sp9npo3ZKufLVhoRnqT7pepHRgiq5ziU9gyUEeuXdvo",
 				"x-ca-stage":     DefaultString(client.Stage, "RELEASE"),
 			}, header)
 			signedParams := make(map[string]string)
