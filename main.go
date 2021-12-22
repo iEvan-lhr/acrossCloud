@@ -17,13 +17,13 @@ func main() {
 	//headers  请求头额外参数
 	//use DoHttpsToApiGateway 来发送https请求
 	headers := make(map[string]string)
-	headers["Authorization"] = "111"
+	headers["Authorization"] = "MicsAphxXkVV1rDLI2wB11CVgk0Q4jNQ"
 	resp, err := util.DoHttpsToApiGateway("",
 		"",
 		"",
 		"/",
 		"POST",
-		``, nil)
+		`{}`, headers)
 	error2.PanicError(err)
 	fmt.Println(resp)
 }
