@@ -1,12 +1,40 @@
 package util
 
 import (
+	"errors"
 	types "github.com/iEvan-lhr/acrossCloud/type"
 	"io/ioutil"
 	"strings"
 )
 
-func DoHttpToApiGateway(appKey, appSecret, domain, path, method, body string, headers map[string]string) (resp string, err error) {
+type AcrossCloud struct {
+	AppKey    string
+	AppSecret string
+	Domain    string
+	Path      string
+	Method    string
+	Body      string
+	header    map[string]string
+}
+
+func (ac AcrossCloud) init() {
+	ac.header = make(map[string]string)
+}
+
+func (ac AcrossCloud) SetHeader(key, value string) {
+	ac.header[key] = value
+}
+
+func (ac AcrossCloud) DoApiGetWayResp(protocol string) (resp string, err error) {
+	if protocol == "http" {
+		return doHttpToApiGateway(ac.AppKey, ac.AppSecret, ac.Domain, ac.Path, ac.Method, ac.Body, ac.header)
+	} else if protocol == "https" {
+		return doHttpsToApiGateway(ac.AppKey, ac.AppSecret, ac.Domain, ac.Path, ac.Method, ac.Body, ac.header)
+	} else {
+		return "", errors.New("protocol Only in(http,https)")
+	}
+}
+func doHttpToApiGateway(appKey, appSecret, domain, path, method, body string, headers map[string]string) (resp string, err error) {
 	client := &types.Client{
 		Domain:    domain,
 		AppKey:    appKey,
@@ -17,10 +45,13 @@ func DoHttpToApiGateway(appKey, appSecret, domain, path, method, body string, he
 		Body: body,
 	}
 	result, err := doRequest(&request, &runtimeObject, client, path, method, "http", headers)
+	if result.Body == nil {
+		return err.Error(), nil
+	}
 	all, err := ioutil.ReadAll(result.Body)
 	return string(all), err
 }
-func DoHttpsToApiGateway(appKey, appSecret, domain, path, method, body string, headers map[string]string) (resp string, err error) {
+func doHttpsToApiGateway(appKey, appSecret, domain, path, method, body string, headers map[string]string) (resp string, err error) {
 	client := &types.Client{
 		Domain:    domain,
 		AppKey:    appKey,

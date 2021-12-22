@@ -16,14 +16,17 @@ func main() {
 	//body 请求体
 	//headers  请求头额外参数
 	//use DoHttpsToApiGateway 来发送https请求
-	headers := make(map[string]string)
-	headers["Authorization"] = "MicsAphxXkVV1rDLI2wB11CVgk0Q4jNQ"
-	resp, err := util.DoHttpsToApiGateway("",
-		"",
-		"",
-		"/",
-		"POST",
-		`{}`, headers)
+	ac := util.AcrossCloud{
+		AppKey:    "",
+		AppSecret: "",
+		Domain:    "",
+		Path:      "",
+		Method:    "",
+		Body:      ``,
+	}
+	//resp, err := ac.DoApiGetWayResp("http")
+	resp, err := ac.DoApiGetWayResp("https")
 	error2.PanicError(err)
 	fmt.Println(resp)
+
 }
