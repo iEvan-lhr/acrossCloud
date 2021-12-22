@@ -17,19 +17,22 @@ type AcrossCloud struct {
 	header    map[string]string
 }
 
-func (ac AcrossCloud) init() {
-	ac.header = make(map[string]string)
+func (ac AcrossCloud) SetHeader(key, value string) {
+	if ac.header == nil {
+		ac.header = map[string]string{key: value}
+		allAcHeader[ac.AppKey] = ac.header
+	} else {
+		allAcHeader[ac.AppKey][key] = value
+	}
 }
 
-func (ac AcrossCloud) SetHeader(key, value string) {
-	ac.header[key] = value
-}
+var allAcHeader = map[string]map[string]string{}
 
 func (ac AcrossCloud) DoApiGetWayResp(protocol string) (resp string, err error) {
 	if protocol == "http" {
-		return doHttpToApiGateway(ac.AppKey, ac.AppSecret, ac.Domain, ac.Path, ac.Method, ac.Body, ac.header)
+		return doHttpToApiGateway(ac.AppKey, ac.AppSecret, ac.Domain, ac.Path, ac.Method, ac.Body, allAcHeader[ac.AppKey])
 	} else if protocol == "https" {
-		return doHttpsToApiGateway(ac.AppKey, ac.AppSecret, ac.Domain, ac.Path, ac.Method, ac.Body, ac.header)
+		return doHttpsToApiGateway(ac.AppKey, ac.AppSecret, ac.Domain, ac.Path, ac.Method, ac.Body, allAcHeader[ac.AppKey])
 	} else {
 		return "", errors.New("protocol Only in(http,https)")
 	}

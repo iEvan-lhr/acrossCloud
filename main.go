@@ -19,11 +19,12 @@ func main() {
 	ac := util.AcrossCloud{
 		AppKey:    "",
 		AppSecret: "",
-		Domain:    "",
-		Path:      "",
-		Method:    "",
-		Body:      ``,
+		Domain:    "-cn-beijing.alicloudapi.com",
+		Path:      "/",
+		Method:    "POST",
+		Body:      `{}`,
 	}
+	ac.SetHeader("Authorization", "SyJi4rCJWT9TcDEjKDTYN2S7DzmXI1Et8_bvX0xIsMw")
 	//resp, err := ac.DoApiGetWayResp("http")
 	resp, err := ac.DoApiGetWayResp("https")
 	error2.PanicError(err)
