@@ -1,7 +1,6 @@
 package util
 
 import (
-	types "acrossCloud/type"
 	"context"
 	"crypto/tls"
 	"crypto/x509"
@@ -9,6 +8,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	types "github.com/alibabacloud-go/acrossCloud/type"
 	"golang.org/x/net/proxy"
 	"math"
 	"math/rand"

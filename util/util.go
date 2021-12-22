@@ -1,7 +1,7 @@
 package util
 
 import (
-	types "acrossCloud/type"
+	types "github.com/alibabacloud-go/acrossCloud/type"
 	"io/ioutil"
 	"strings"
 )
