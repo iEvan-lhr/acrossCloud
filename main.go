@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	error2 "github.com/alibabacloud-go/acrossCloud/error"
-	"github.com/alibabacloud-go/acrossCloud/util"
+	error2 "github.com/iEvan-lhr/acrossCloud/error"
+	"github.com/iEvan-lhr/acrossCloud/util"
 )
 
 func main() {

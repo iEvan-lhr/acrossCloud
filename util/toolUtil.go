@@ -8,7 +8,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	types "github.com/alibabacloud-go/acrossCloud/type"
+	types "github.com/iEvan-lhr/acrossCloud/type"
 	"golang.org/x/net/proxy"
 	"math"
 	"math/rand"

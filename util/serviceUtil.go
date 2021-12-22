@@ -1,7 +1,6 @@
 package util
 
 import (
-	types "acrossCloud/type"
 	"bytes"
 	"crypto/hmac"
 	"crypto/md5"
@@ -9,6 +8,7 @@ import (
 	"crypto/sha256"
 	"encoding/base64"
 	"encoding/hex"
+	types "github.com/iEvan-lhr/acrossCloud/type"
 	"hash"
 	"io"
 	rand2 "math/rand"

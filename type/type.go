@@ -1,9 +1,9 @@
 package types
 
 import (
-	error2 "acrossCloud/error"
 	"encoding/json"
 	"fmt"
+	error2 "github.com/iEvan-lhr/acrossCloud/error"
 	"io"
 	"log"
 	"net/http"
