@@ -1,4 +1,4 @@
-module acrossCloud
+module github.com/alibabacloud-go/acrossCloud
 
 go 1.16
 
