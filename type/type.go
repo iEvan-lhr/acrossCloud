@@ -5,6 +5,7 @@ import (
 	"fmt"
 	error2 "github.com/iEvan-lhr/acrossCloud/error"
 	"io"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"strconv"
@@ -84,6 +85,17 @@ type Response struct {
 	StatusCode    int
 	StatusMessage string
 	Headers       map[string]string
+}
+
+func (r Response) String() string {
+	if r.Body == nil {
+		return fmt.Sprintf("Body:%s\nStatusCode:%v\nStatusMessage:%s\nHeaders:%s", "Body Is nil ! Please Check", r.StatusCode, r.StatusMessage, r.Headers)
+	} else {
+		all, err := ioutil.ReadAll(r.Body)
+		error2.PanicError(err)
+		return fmt.Sprintf("Body:%s\nStatusCode:%v\nStatusMessage:%s\nHeaders:%s", string(all), r.StatusCode, r.StatusMessage, r.Headers)
+	}
+
 }
 
 // RuntimeObject is used for converting http configuration

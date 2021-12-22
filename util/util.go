@@ -31,14 +31,14 @@ func DoHttpsToApiGateway(appKey, appSecret, domain, path, method, body string, h
 		Body: body,
 	}
 	result, err := doRequest(&request, &runtimeObject, client, path, method, "https", headers)
+	if result.Body == nil {
+		return err.Error(), nil
+	}
 	all, err := ioutil.ReadAll(result.Body)
 	return string(all), err
 }
-func doRequest(request *types.VpcManagement, runtime *types.RuntimeOptions, client *types.Client, path, method, protocol string, execHeaders map[string]string) (result *types.Response, err error) {
-	for s, s2 := range execHeaders {
-		request.Header[s] = s2
-	}
-	resp, err := requestDo(path, protocol, method, "String", request.Body, request.Header, *runtime, client)
+func doRequest(request *types.VpcManagement, runtime *types.RuntimeOptions, client *types.Client, path, method, protocol string, execHeaders map[string]string) (result types.Response, err error) {
+	resp, err := requestDo(path, protocol, method, "String", request.Body, execHeaders, *runtime, client)
 	if err != nil {
 		return result, err
 	}
@@ -53,8 +53,7 @@ func doRequest(request *types.VpcManagement, runtime *types.RuntimeOptions, clie
 		})
 		return result, err
 	}
-	result = &resp
-	return result, err
+	return resp, err
 }
 
 func requestDo(pathname string, protocol string, method string, bodyType string, body interface{}, header map[string]string, runtime types.RuntimeOptions, client *types.Client) (result types.Response, err error) {
