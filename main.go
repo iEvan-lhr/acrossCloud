@@ -29,5 +29,4 @@ func main() {
 	resp, err := ac.DoApiGetWayResp("https")
 	error2.PanicError(err)
 	fmt.Println(resp)
-
 }
